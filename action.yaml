@@ -1,14 +1,14 @@
-name: 'Auto Release Notes'
-description: 'Github action to have auto release notes published to Microsoft Teams'
+name: 'Publish OpenAPI Documentation'
+description: 'Github action to have auto publish services OpenAPI documentation to centralized repo.'
 inputs:
   service-name:
-    description: 'Name of service being deployed.'
+    description: 'Name of service.'
     required: true
   team-name:
-    description: 'Name of team that owns application.'
+    description: 'Name of team that owns service.'
     required: true
   file-output-path:
-    description: 'Path to file that includes file name.  eg. /path/to/file.txt'
+    description: 'Path to file that includes file name.  eg. /path/to/file.json'
     required: true
 runs:
   using: "composite"
@@ -31,4 +31,3 @@ runs:
             git commit -m "docs: Update OpenAPI specs for ${{ inputs.service-name }}"
             git push
          fi
-
