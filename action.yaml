@@ -17,7 +17,6 @@ runs:
   using: "composite"
   steps:
     - name: Publish OpenAPI Documentation
-      if: ${{ inputs.environment == 'production' }}
       shell: bash
       run: |
          eval `ssh-agent -s`
