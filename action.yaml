@@ -16,9 +16,11 @@ runs:
     - name: Publish OpenAPI Documentation
       if: ${{ inputs.environment == 'production' }}
       shell: bash
+      env:
+        CENTRALIZED_OPENAPI_SPEC_REPO_DEPLOY_PRIVATE_KEY: ${{ secrets.CENTRALIZED_OPENAPI_SPEC_REPO_DEPLOY_PRIVATE_KEY }}
       run: |
          eval `ssh-agent -s`
-         ssh-add - <<< '${{ secrets.CENTRALIZED_OPENAPI_SPEC_REPO_DEPLOY_PRIVATE_KEY }}'
+         ssh-add - <<< $CENTRALIZED_OPENAPI_SPEC_REPO_DEPLOY_PRIVATE_KEY
          git clone git@github.com:sdi-one-architecture/centralized-openapi-specs.git
          cp --force ${{ inputs.file-output-path }} centralized-openapi-specs/${{ inputs.team-name }}/
          cd centralized-openapi-specs
