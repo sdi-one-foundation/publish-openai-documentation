@@ -10,17 +10,18 @@ inputs:
   file-output-path:
     description: 'Path to file that includes file name.  eg. /path/to/file.json'
     required: true
+  centralized-openapi-spec-repo-deploy-private-key:
+    description: 'Path to file that includes file name.  eg. /path/to/file.json'
+    required: true
 runs:
   using: "composite"
   steps:
     - name: Publish OpenAPI Documentation
       if: ${{ inputs.environment == 'production' }}
       shell: bash
-      env:
-        CENTRALIZED_OPENAPI_SPEC_REPO_DEPLOY_PRIVATE_KEY: ${{ secrets.CENTRALIZED_OPENAPI_SPEC_REPO_DEPLOY_PRIVATE_KEY }}
       run: |
          eval `ssh-agent -s`
-         ssh-add - <<< $CENTRALIZED_OPENAPI_SPEC_REPO_DEPLOY_PRIVATE_KEY
+         ssh-add - <<< ${{ inputs.centralized-openapi-spec-repo-deploy-private-key }}
          git clone git@github.com:sdi-one-architecture/centralized-openapi-specs.git
          cp --force ${{ inputs.file-output-path }} centralized-openapi-specs/${{ inputs.team-name }}/
          cd centralized-openapi-specs
