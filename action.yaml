@@ -25,8 +25,8 @@ runs:
          git clone git@github.com:sdi-one-architecture/centralized-openapi-specs.git
          cp --force ${{ inputs.file-output-path }} centralized-openapi-specs/${{ inputs.team-name }}/
          cd centralized-openapi-specs
-         git config --global user.email "${{ secrets.DEVOPS_BOT_EMAIL }}"
-         git config --global user.name "${{ secrets.DEVOPS_BOT_USERNAME }}"
+         git config --global user.email "sdi-devops-bot@one.singledigits.com"
+         git config --global user.name "sdi-devops-bot"
          git add .
          if git diff-index --quiet HEAD; then
             echo "No changes to commit"
