@@ -20,7 +20,7 @@ runs:
       shell: bash
       run: |
          eval `ssh-agent -s`
-         ssh-add - <<< ${{ inputs.centralized-openapi-spec-repo-deploy-private-key }}
+         ssh-add - <<< '${{ inputs.centralized-openapi-spec-repo-deploy-private-key }}'
          git clone git@github.com:sdi-one-architecture/centralized-openapi-specs.git
          cp --force ${{ inputs.file-output-path }} centralized-openapi-specs/${{ inputs.team-name }}/
          cd centralized-openapi-specs
